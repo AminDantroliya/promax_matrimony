@@ -1,0 +1,804 @@
+{
+  "status": "success",
+  "code": 200,
+  "message": "Registration form schema loaded successfully",
+  "data": {
+    "total_steps": 9,
+    "allow_skip_steps": false,
+    "sections": [
+      {
+        "step_number": 1,
+        "step_key": "basic_credentials",
+        "title": "Create Account",
+        "subtitle": "Fill in your details to start your journey",
+        "endpoint": "register",
+        "http_method": "POST",
+        "fields": [
+          {
+            "name": "gender",
+            "label": "Gender",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Male",
+            "dropdown_source": "gender_list"
+          },
+          {
+            "name": "profileby",
+            "label": "Profile Created For",
+            "placeholder": "Select relationship",
+            "type": "single_select_dropdown",
+            "dropdown_source": "profileby_list",
+            "is_required": true
+          },
+          {
+            "name": "fullname",
+            "label": "Full Name",
+            "placeholder": "Enter your full name",
+            "type": "text",
+            "icon": "user",
+            "is_required": true,
+            "validation": {
+              "min_length": 3,
+              "max_length": 50,
+              "error_message": "Please enter a valid full name"
+            }
+          },
+          {
+            "name": "mobile",
+            "label": "Mobile Number",
+            "placeholder": "Enter mobile number",
+            "type": "phone_number",
+            "is_required": true,
+            "default_country_code": "+91",
+            "validation": {
+              "min_digits": 8,
+              "max_digits": 15,
+              "error_message": "Please enter a valid mobile number"
+            }
+          },
+          {
+            "name": "email",
+            "label": "Email Address",
+            "placeholder": "Enter your email address",
+            "type": "email",
+            "icon": "mail",
+            "is_required": true,
+            "validation": {
+              "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+              "error_message": "Please enter a valid email address"
+            }
+          },
+          {
+            "name": "password",
+            "label": "Password",
+            "placeholder": "Enter your password",
+            "type": "password",
+            "icon": "lock",
+            "is_required": true,
+            "validation": {
+              "min_length": 8,
+              "error_message": "Password must be at least 8 characters"
+            }
+          },
+          {
+            "name": "confirm_password",
+            "label": "Confirm Password",
+            "placeholder": "Re-enter your password",
+            "type": "password",
+            "icon": "lock",
+            "is_required": true,
+            "validation": {
+              "match_field": "password",
+              "error_message": "Passwords do not match"
+            }
+          },
+          {
+            "name": "birthdate",
+            "label": "Date of Birth",
+            "placeholder": "DD-MM-YYYY",
+            "type": "date_picker",
+            "icon": "calendar",
+            "is_required": true,
+            "validation": {
+              "min_age_male": 21,
+              "min_age_female": 18,
+              "error_message": "Age must be at least 18 (Female) or 21 (Male)"
+            }
+          },
+          {
+            "name": "marital_status",
+            "label": "Marital Status",
+            "placeholder": "Select marital status",
+            "type": "single_select_dropdown",
+            "dropdown_source": "marital_status_list",
+            "is_required": true
+          },
+          {
+            "name": "total_children",
+            "label": "Total Children",
+            "placeholder": "Select total children",
+            "type": "single_select_dropdown",
+            "dropdown_source": "total_children_list",
+            "is_required": false,
+            "show_if": {
+              "field": "marital_status",
+              "operator": "not_equal",
+              "value": "Unmarried"
+            }
+          },
+          {
+            "name": "status_children",
+            "label": "Children Living With",
+            "placeholder": "Select children status",
+            "type": "single_select_dropdown",
+            "dropdown_source": "status_children_list",
+            "is_required": false,
+            "show_if": {
+              "field": "total_children",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Children"
+              ]
+            }
+          },
+          {
+            "name": "religion",
+            "label": "Religion",
+            "placeholder": "Select religion",
+            "type": "single_select_dropdown",
+            "dropdown_source": "religion_list",
+            "is_required": true
+          },
+          {
+            "name": "caste",
+            "label": "Caste / Subcaste",
+            "placeholder": "Select caste",
+            "type": "dependent_dropdown",
+            "parent_field": "religion",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "religion_id",
+            "is_required": true
+          },
+          {
+            "name": "terms",
+            "label": "I agree to Terms & Conditions and Privacy Policy",
+            "type": "checkbox",
+            "is_required": true,
+            "default_value": true,
+            "validation": {
+              "must_be_checked": true,
+              "error_message": "You must accept Terms & Conditions"
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "step_key": "religious_info",
+        "title": "Religious Information",
+        "subtitle": "Enter your religious information",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 1
+        },
+        "fields": [
+          {
+            "name": "subcaste",
+            "label": "Sub Caste",
+            "placeholder": "Enter sub-caste",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "mother_tongue",
+            "label": "Mother Tongue",
+            "placeholder": "Select mother tongue",
+            "type": "single_select_dropdown",
+            "dropdown_source": "mother_tongue_list",
+            "is_required": true
+          },
+          {
+            "name": "manglik",
+            "label": "Manglik Status",
+            "placeholder": "Select manglik status",
+            "type": "single_select_dropdown",
+            "dropdown_source": "manglik_list",
+            "is_required": true
+          },
+          {
+            "name": "gothra",
+            "label": "Gotra",
+            "placeholder": "Enter gotra",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "moonsign",
+            "label": "Moonsign",
+            "placeholder": "Select moon sign",
+            "type": "single_select_dropdown",
+            "dropdown_source": "moongsign_list",
+            "is_required": false
+          },
+          {
+            "name": "star",
+            "label": "Star",
+            "placeholder": "Select star",
+            "type": "single_select_dropdown",
+            "dropdown_source": "star_list",
+            "is_required": false
+          },
+          {
+            "name": "horoscope",
+            "label": "Horoscope Match Required?",
+            "placeholder": "Select horoscope preference",
+            "type": "single_select_dropdown",
+            "dropdown_source": "horoscope_list",
+            "is_required": false
+          },
+          {
+            "name": "birthplace",
+            "label": "Place of Birth",
+            "placeholder": "Enter birth city",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "birthtime",
+            "label": "Time of Birth",
+            "placeholder": "HH:MM AM/PM",
+            "type": "time_picker",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 3,
+        "step_key": "location_info",
+        "title": "Location Details",
+        "subtitle": "Enter your location details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 2
+        },
+        "fields": [
+          {
+            "name": "country_id",
+            "label": "Country",
+            "placeholder": "Select country",
+            "type": "single_select_dropdown",
+            "dropdown_source": "countryList",
+            "is_required": true
+          },
+          {
+            "name": "state_id",
+            "label": "State",
+            "placeholder": "Select state",
+            "type": "dependent_dropdown",
+            "parent_field": "country_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "country_id",
+            "is_required": true
+          },
+          {
+            "name": "city",
+            "label": "City",
+            "placeholder": "Select city",
+            "type": "dependent_dropdown",
+            "parent_field": "state_id",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "dependency_param": "state_id",
+            "is_required": true
+          },
+          {
+            "name": "alternate_number",
+            "label": "Alternate Contact Number",
+            "placeholder": "Enter alternate phone number",
+            "type": "phone_number",
+            "is_required": false
+          },
+          {
+            "name": "residence_type",
+            "label": "Residence Type",
+            "placeholder": "Select residence type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "residence_master_list",
+            "is_required": false
+          },
+          {
+            "name": "nri_country",
+            "label": "If NRI Originated country",
+            "placeholder": "Enter If NRI Originated country",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "address",
+            "label": "Address",
+            "placeholder": "Enter address",
+            "type": "textarea",
+            "is_required": false,
+            "max_lines": 3
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "step_key": "education_career",
+        "title": "Education & Other Details",
+        "subtitle": "Enter your education & other details",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 3
+        },
+        "fields": [
+          {
+            "name": "education_level",
+            "label": "Education Level",
+            "placeholder": "Select Education",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "education_list",
+            "is_required": true
+          },
+          {
+            "name": "education_details",
+            "label": "Education Details",
+            "placeholder": "e.g. B.Tech in Computer Science",
+            "type": "text",
+            "is_required": false
+          },
+          {
+            "name": "occupation",
+            "label": "Occupation",
+            "placeholder": "Select Occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "employee_in",
+            "label": "Employed In",
+            "placeholder": "Select Employee In",
+            "type": "single_select_dropdown",
+            "dropdown_source": "employee_in_list",
+            "is_required": true
+          },
+          {
+            "name": "income",
+            "label": "Annual Income",
+            "placeholder": "Select Annual Income",
+            "type": "single_select_dropdown",
+            "dropdown_source": "income_list",
+            "is_required": true
+          },
+          {
+            "name": "designation_level",
+            "label": "Designation",
+            "placeholder": "Select Designation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "designation_list",
+            "is_required": true
+          }
+        ]
+      },
+      {
+        "step_number": 5,
+        "step_key": "lifestyle_habits",
+        "title": "Physical Information",
+        "subtitle": "Enter your physical information",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 4
+        },
+        "fields": [
+          {
+            "name": "height",
+            "label": "Height",
+            "placeholder": "Select Height",
+            "type": "single_select_dropdown",
+            "dropdown_source": "height_list",
+            "is_required": true
+          },
+          {
+            "name": "weight",
+            "label": "Weight",
+            "placeholder": "Select Weight",
+            "type": "single_select_dropdown",
+            "dropdown_source": "weight_list",
+            "is_required": true
+          },
+          {
+            "name": "diet",
+            "label": "Eating Habits",
+            "placeholder": "Select Eating Habits",
+            "type": "single_select_dropdown",
+            "dropdown_source": "eating_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "smoke",
+            "label": "Smoking Habit",
+            "placeholder": "Select Smoking Habit",
+            "type": "single_select_dropdown",
+            "dropdown_source": "smoking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "drink",
+            "label": "Drinking Habit",
+            "placeholder": "Select drinking habit",
+            "type": "single_select_dropdown",
+            "dropdown_source": "drinking_habit_list",
+            "is_required": false
+          },
+          {
+            "name": "body_type",
+            "label": "Body Type",
+            "placeholder": "Select Body Type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "body_type_list",
+            "is_required": false
+          },
+          {
+            "name": "complexion",
+            "label": "Complexion",
+            "placeholder": "Select Complexion",
+            "type": "single_select_dropdown",
+            "dropdown_source": "complexion_list",
+            "is_required": false
+          },
+          {
+            "name": "blood_group_id",
+            "label": "Blood Group",
+            "placeholder": "Select Blood Group",
+            "type": "single_select_dropdown",
+            "dropdown_source": "blood_group_list",
+            "is_required": false
+          },
+          {
+            "name": "about_me_description",
+            "label": "About Me",
+            "placeholder": "Write a few lines about yourself...",
+            "type": "textarea",
+            "has_ai_generate": true,
+            "ai_generate_endpoint": "register/generate-about-me",
+            "is_required": false,
+            "max_lines": 5,
+            "validation": {
+              "min_length": 20
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 6,
+        "step_key": "family_details",
+        "title": "Family Details",
+        "subtitle": "Information about your family",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 5
+        },
+        "fields": [
+          {
+            "name": "family_type",
+            "label": "Family Type",
+            "type": "single_select_dropdown",
+            "dropdown_source": "family_type_list",
+            "is_required": false
+          },
+          {
+            "name": "family_status",
+            "label": "Family Status",
+            "type": "single_select_dropdown",
+            "dropdown_source": "family_status_list",
+            "is_required": false
+          },
+          {
+            "name": "father_name",
+            "label": "Father Name",
+            "placeholder": "Enter father's name",
+            "type": "text",
+            "is_required": true
+          },
+          {
+            "name": "father_occupation",
+            "label": "Father Occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "mother_name",
+            "label": "Mother Name",
+            "placeholder": "Enter mother's name",
+            "type": "text",
+            "is_required": true
+          },
+          {
+            "name": "mother_occupation",
+            "label": "Mother Occupation",
+            "type": "single_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": true
+          },
+          {
+            "name": "no_of_brother",
+            "label": "No. of Brothers",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_bro_sis_list",
+            "is_required": false
+          },
+          {
+            "name": "no_of_married_brother",
+            "label": "No. of Married Brothers",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_married_brother_list",
+            "is_required": false,
+            "show_if": {
+              "field": "no_of_brother",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Brothers"
+              ]
+            }
+          },
+          {
+            "name": "no_of_sister",
+            "label": "No. of Sisters",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_bro_sis_list",
+            "is_required": false
+          },
+          {
+            "name": "no_of_married_sister",
+            "label": "No. of Married Sisters",
+            "type": "single_select_dropdown",
+            "dropdown_source": "no_of_married_sister_list",
+            "is_required": false,
+            "show_if": {
+              "field": "no_of_sister",
+              "operator": "not_in",
+              "value": [
+                "0",
+                "None",
+                "No Sisters"
+              ]
+            }
+          },
+          {
+            "name": "family_details",
+            "label": "Family Details",
+            "placeholder": "Write a few words about your family...",
+            "type": "textarea",
+            "is_required": false,
+            "max_lines": 3
+          }
+        ]
+      },
+      {
+        "step_number": 7,
+        "step_key": "photos",
+        "title": "Upload Photos",
+        "subtitle": "Add photos & take a selfie to verify your profile",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "is_multipart": true,
+        "extra_params": {
+          "step": 6
+        },
+        "fields": [
+          {
+            "name": "photo_visibility",
+            "label": "Privacy Settings",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "2",
+            "options": [
+              {
+                "id": "0",
+                "label": "Hide for all members"
+              },
+              {
+                "id": "1",
+                "label": "View to All Members"
+              },
+              {
+                "id": "2",
+                "label": "Visible only to paid members"
+              }
+            ]
+          },
+          {
+            "name": "selfie_photo",
+            "label": "Live Selfie Verification",
+            "type": "selfie_capture",
+            "is_required": true,
+            "description": "Ensure your face is clearly visible"
+          },
+          {
+            "name": "photo1",
+            "label": "Profile Photo",
+            "type": "photo_upload",
+            "is_required": true,
+            "aspect_ratio": "1:1"
+          },
+          {
+            "name": "photo2",
+            "label": "Photo 2",
+            "type": "photo_upload",
+            "is_required": false
+          },
+          {
+            "name": "photo3",
+            "label": "Photo 3",
+            "type": "photo_upload",
+            "is_required": false
+          },
+          {
+            "name": "photo4",
+            "label": "Photo 4",
+            "type": "photo_upload",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 8,
+        "step_key": "id_proof",
+        "title": "ID Verification",
+        "subtitle": "Upload government ID to get verified badge",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "is_multipart": true,
+        "extra_params": {
+          "step": 7
+        },
+        "fields": [
+          {
+            "name": "id_proof_type",
+            "label": "Select ID Proof Type",
+            "type": "segment_selector",
+            "is_required": true,
+            "default_value": "Aadhar Card",
+            "dropdown_source": "id_proof_type_list"
+          },
+          {
+            "name": "id_proof_front",
+            "label": "Front Side Photo",
+            "type": "file_upload",
+            "is_required": false
+          },
+          {
+            "name": "id_proof_back",
+            "label": "Back Side Photo",
+            "type": "file_upload",
+            "is_required": false
+          }
+        ]
+      },
+      {
+        "step_number": 9,
+        "step_key": "partner_preferences",
+        "title": "Partner Preferences",
+        "subtitle": "Set your match criteria",
+        "endpoint": "register/next-step",
+        "http_method": "POST",
+        "extra_params": {
+          "step": 8
+        },
+        "fields": [
+          {
+            "name": "part_age_range",
+            "label": "Partner Age",
+            "type": "range_slider",
+            "min_val": 18,
+            "max_val": 60,
+            "default_range": [18, 60],
+            "is_required": true
+          },
+          {
+            "name": "part_height_range",
+            "label": "Partner Height",
+            "type": "range_slider",
+            "min_val": 48,
+            "max_val": 84,
+            "default_range": [48, 84],
+            "is_required": true
+          },
+          {
+            "name": "part_religion",
+            "label": "Partner Religion",
+            "placeholder": "Select Partner Religion",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "religion_list",
+            "is_required": false
+          },
+          {
+            "name": "part_caste",
+            "label": "Partner Caste",
+            "placeholder": "Select Partner Caste",
+            "type": "multi_select_dropdown",
+            "parent_field": "part_religion",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "is_required": false
+          },
+          {
+            "name": "part_country",
+            "label": "Partner Country",
+            "placeholder": "Select Partner Country",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "country_list",
+            "is_required": false
+          },
+          {
+            "name": "part_state",
+            "label": "Partner State",
+            "placeholder": "Select Partner State",
+            "type": "multi_select_dropdown",
+            "parent_field": "part_country",
+            "dependency_api": "common-request/get-dependency-dropdown",
+            "is_required": false
+          },
+          {
+            "name": "part_marital_status",
+            "label": "Partner Marital Status",
+            "placeholder": "Select Partner Marital Status",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "marital_status_list",
+            "is_required": false
+          },
+          {
+            "name": "part_income",
+            "label": "Partner Annual Income",
+            "placeholder": "Select Partner Annual Income",
+            "type": "single_select_dropdown",
+            "dropdown_source": "income_list",
+            "is_required": false
+          },
+          {
+            "name": "part_education",
+            "label": "Partner Education",
+            "placeholder": "Select Partner Education",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "education_list",
+            "is_required": false
+          },
+          {
+            "name": "part_occupation",
+            "label": "Partner Occupation",
+            "placeholder": "Select Partner Occupation",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "occupation_list",
+            "is_required": false
+          },
+          {
+            "name": "part_mothertongue",
+            "label": "Partner Mother Tongue",
+            "placeholder": "Select Partner Mother Tongue",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "mother_tongue_list",
+            "is_required": false
+          },
+          {
+            "name": "part_manglik",
+            "label": "Partner Manglik",
+            "placeholder": "Select Partner Manglik",
+            "type": "multi_select_dropdown",
+            "dropdown_source": "manglik_list",
+            "is_required": false
+          }
+        ]
+      }
+    ]
+  }
+}

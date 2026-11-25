@@ -1,0 +1,154 @@
+name: pro_matrimony
+description: "Pro Max Matrimony"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: ^0.20.3
+  dio: ^5.11.1
+  google_fonts: ^9.0.0
+  gap: ^3.0.1
+
+  internet_connection_checker_plus: ^3.1.2
+  shared_preferences: ^2.5.6
+
+  # Notification
+  flutter_local_notifications: ^22.3.1
+  firebase_core: ^4.15.0
+  firebase_messaging: ^16.7.0
+  firebase_auth: ^6.7.0
+  firebase_database: ^12.6.0
+  rxdart: ^0.28.0
+
+  pinput: ^7.0.0
+  salomon_bottom_bar: ^3.3.2
+  toastification: ^3.2.0
+  blurrycontainer: ^2.1.0
+  flutter_intl_phone_field: ^1.0.0
+  country_codes: ^3.3.0
+  url_launcher: ^6.3.3
+  webview_flutter: ^4.14.1
+  package_info_plus: ^10.2.2
+  flutter_overlay_loader: ^2.0.0
+  image_picker: ^1.2.4
+  image_cropper: ^12.2.1
+  cached_network_image: ^4.0.4
+  flutter_svg: ^2.3.0
+  lottie: ^3.6.1
+  html_unescape: ^2.0.0
+  flutter_widget_from_html: ^0.17.4
+  percent_indicator: ^4.2.5
+  vibration: ^3.2.1
+  flutter_advanced_switch: ^3.2.1
+  flutter_phoenix: ^1.1.1
+  step_progress_indicator: ^1.0.2
+  wheel_slider: ^1.2.2
+  custom_sliding_segmented_control: ^2.0.0
+
+  #PAYMENT_RELATED
+  flutter_dotenv: ^6.0.1
+  in_app_purchase: ^3.3.1
+  crypto: ^3.0.7
+  shimmer: ^4.0.0
+
+  #zego
+  zego_zpns: ^2.8.1
+  zego_zim: ^3.2.0
+  zego_uikit: ^2.29.2
+  zego_uikit_prebuilt_call: ^4.24.4
+  zego_uikit_signaling_plugin: ^2.8.21
+  permission_handler: ^13.0.2
+  geolocator: ^14.1.1
+
+  # Riverpod
+  flutter_riverpod: ^3.4.3
+
+  # Navigation
+  go_router: ^18.0.2
+  share_plus: ^13.3.1
+
+  # Serialization
+  riverpod_annotation: ^4.0.7
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.12.0
+
+  dropdown_search: ^8.1.0
+  material_ui: ^1.7.0
+  camera: ^0.12.1
+  google_mlkit_face_detection: ^0.15.1
+  video_player: ^2.14.1
+  youtube_player_flutter: ^10.0.1
+  path_provider: ^2.1.6
+  open_filex: ^4.7.0
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # Code Generation
+  riverpod_generator: ^4.0.9
+  build_runner: ^2.16.2
+  freezed: ^4.0.2
+  json_serializable: ^6.14.1
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - .env.dev
+    - .env.prod
+    - assets/animations/
+    - assets/fonts/
+    - assets/png/images/
+    - assets/png/placeholder/
+    - assets/svg_icons/action_icons/
+    - assets/svg_icons/ai_match_interest_icons/
+    - assets/svg_icons/appbar_icons/
+    - assets/svg_icons/auth_screen_icons/
+    - assets/svg_icons/bottom_menu_icons/
+    - assets/svg_icons/call_history_icons/
+    - assets/svg_icons/dashboard_icons/
+    - assets/svg_icons/delete_profile_icons/
+    - assets/svg_icons/intro_screen_icons/
+    - assets/svg_icons/more_menu_icons/
+    - assets/svg_icons/photo_related_icons/
+    - assets/svg_icons/profile_icons/
+    - assets/svg_icons/search_icons/
+    - assets/svg_icons/splash_icons/
+    - assets/svg_icons/success_story_icons/
+    - assets/svg_icons/plan_icons/
+    - assets/svg_icons/settings_screen_icons/
+    - assets/svg_icons/chat_icons/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/PlayfairDisplay-Italic.ttf
+          style: italic
+        - asset: assets/fonts/PlayfairDisplay-BoldItalic.ttf
+          weight: 700
+          style: italic
+
+dependency_overrides:
+  dbus: ^0.8.0

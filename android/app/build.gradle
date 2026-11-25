@@ -1,0 +1,76 @@
+plugins {
+    id "com.android.application"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace = "com.pro.matrimony"
+    compileSdk = 37
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        }
+    }
+
+    defaultConfig {
+        applicationId = "com.pro.matrimony"
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion 37
+        versionCode 3
+        versionName "1.0.2"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            if (rootProject.file('key.properties').exists()) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
+
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+}
+
+flutter {
+    source = "../.."
+}
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:35.0.0')
+    implementation("com.google.firebase:firebase-auth")
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'im.zego:zpns-fcm:2.8.0' //ZPNs package for Google FCM push
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+}

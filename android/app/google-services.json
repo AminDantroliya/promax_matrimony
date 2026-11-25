@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "124854627335",
+    "firebase_url": "https://pro-matrimony-ca7ca-default-rtdb.firebaseio.com",
+    "project_id": "pro-matrimony-ca7ca",
+    "storage_bucket": "pro-matrimony-ca7ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124854627335:android:1e2ba7881998353cd94ea2",
+        "android_client_info": {
+          "package_name": "com.pro.matrimony"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnYxGrnWZaRUC312VAR6AbtD7phx-4d-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124854627335:android:2518763e42f29f5dd94ea2",
+        "android_client_info": {
+          "package_name": "com.proappnarjis.matrimony"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnYxGrnWZaRUC312VAR6AbtD7phx-4d-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124854627335:android:bb916860750b69a3d94ea2",
+        "android_client_info": {
+          "package_name": "com.pronarjis.matrimony"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnYxGrnWZaRUC312VAR6AbtD7phx-4d-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
